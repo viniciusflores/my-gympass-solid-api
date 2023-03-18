@@ -11,10 +11,19 @@ interface ICheckInResponse {
 }
 
 export class CheckInService {
-  constructor(private checkinRepository: CheckInsRepository) {}
+  constructor(private checkInRepository: CheckInsRepository) {}
 
   async execute({ userId, gymId }: ICheckInRequest): Promise<ICheckInResponse> {
-    const checkIn = await this.checkinRepository.create({
+    const checkInOnSameDay = await this.checkInRepository.findByUserIdOnDate(
+      userId,
+      new Date(),
+    )
+
+    if (checkInOnSameDay) {
+      throw new Error()
+    }
+
+    const checkIn = await this.checkInRepository.create({
       user_id: userId,
       gym_id: gymId,
     })
