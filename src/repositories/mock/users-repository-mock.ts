@@ -1,12 +1,13 @@
-import { UsersRepository } from '@/repositories/users-repository'
+import { randomUUID } from 'node:crypto'
 import { Prisma, User } from '@prisma/client'
+import { UsersRepository } from '@/repositories/users-repository'
 
 export class UsersRepositoryMock implements UsersRepository {
   public items: User[] = []
 
   async create(data: Prisma.UserCreateInput) {
     const user = {
-      id: 'user-1',
+      id: randomUUID(),
       name: data.name,
       email: data.email,
       password_hash: data.password_hash,
