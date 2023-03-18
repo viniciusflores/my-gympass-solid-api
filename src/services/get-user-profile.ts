@@ -2,11 +2,11 @@ import { UsersRepository } from '@/repositories/users-repository'
 import { User } from '@prisma/client'
 import { ResourceNotFoundError } from './errors/resource-not-found'
 
-interface IGetUserProfileRequest {
+interface IGetUserProfileServiceRequest {
   userId: string
 }
 
-interface IGetUserProfileResponse {
+interface IGetUserProfileServiceResponse {
   user: User
 }
 
@@ -15,7 +15,7 @@ export class GetUserProfileService {
 
   async execute({
     userId,
-  }: IGetUserProfileRequest): Promise<IGetUserProfileResponse> {
+  }: IGetUserProfileServiceRequest): Promise<IGetUserProfileServiceResponse> {
     const user = await this.usersRepository.findById(userId)
 
     if (!user) {

@@ -6,14 +6,14 @@ import { CheckIn } from '@prisma/client'
 import { CheckInsRepository } from '@/repositories/check-ins-repository'
 import { getDistanceBetweenCoordinates } from '@/utils/get-distance-between-coordinates'
 
-interface ICheckInRequest {
+interface ICheckInServiceRequest {
   userId: string
   gymId: string
   userLatitude: number
   userLongitude: number
 }
 
-interface ICheckInResponse {
+interface ICheckInServiceResponse {
   checkIn: CheckIn
 }
 
@@ -28,7 +28,7 @@ export class CheckInService {
     gymId,
     userLatitude,
     userLongitude,
-  }: ICheckInRequest): Promise<ICheckInResponse> {
+  }: ICheckInServiceRequest): Promise<ICheckInServiceResponse> {
     const gym = await this.gymsRepository.findById(gymId)
 
     if (!gym) {
