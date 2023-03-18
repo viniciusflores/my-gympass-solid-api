@@ -1,14 +1,14 @@
 import { CheckInRepositoryMock } from './../repositories/mock/check-in-repository-mock'
 import { describe, it, expect, beforeEach } from 'vitest'
-import { FetchUserCheckInsHistory } from './fetch-user-check-ins-history'
+import { FetchUserCheckInsHistoryService } from './fetch-user-check-ins-history'
 
 let checkInsRepository: CheckInRepositoryMock
-let sut: FetchUserCheckInsHistory
+let sut: FetchUserCheckInsHistoryService
 
 describe('Fetch User Check-in History Service', () => {
   beforeEach(async () => {
     checkInsRepository = new CheckInRepositoryMock()
-    sut = new FetchUserCheckInsHistory(checkInsRepository)
+    sut = new FetchUserCheckInsHistoryService(checkInsRepository)
   })
 
   it('should be able to fetch check in history', async () => {
