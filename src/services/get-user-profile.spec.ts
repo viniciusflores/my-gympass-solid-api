@@ -1,8 +1,8 @@
-import { InvalidCredentialsError } from './errors/invalid-credentials-error'
-import { UsersRepositoryMock } from '@/repositories/mock/users-repository-mock'
 import { hash } from 'bcryptjs'
 import { describe, it, expect, beforeEach } from 'vitest'
+import { UsersRepositoryMock } from '@/repositories/mock/users-repository-mock'
 import { GetUserProfileService } from './get-user-profile'
+import { ResourceNotFoundError } from './errors/resource-not-found'
 
 let usersRepository: UsersRepositoryMock
 let sut: GetUserProfileService
@@ -31,6 +31,6 @@ describe('Get User Profile Service', () => {
   it('should not be able to get user profile with wrong id', async () => {
     await expect(() =>
       sut.execute({ userId: 'not-valid-id' }),
-    ).rejects.toBeInstanceOf(InvalidCredentialsError)
+    ).rejects.toBeInstanceOf(ResourceNotFoundError)
   })
 })
