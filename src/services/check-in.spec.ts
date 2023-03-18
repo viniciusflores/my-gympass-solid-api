@@ -1,3 +1,5 @@
+import { MaxDistanceError } from './errors/max-distance-error'
+import { MaxNumberOfCheckInsError } from './errors/max-number-of-check-ins-error'
 import { GymsRepositoryMock } from './../repositories/mock/gym-repository-mock'
 import { CheckInService } from './check-in'
 import { CheckInRepositoryMock } from './../repositories/mock/check-in-repository-mock'
@@ -16,13 +18,13 @@ describe('Check In Service', () => {
 
     vi.useFakeTimers()
 
-    await gymsRepository.items.push({
+    await gymsRepository.create({
       id: 'gym-01',
       title: 'JS Gym',
       description: '',
       phone: '',
-      latitude: new Decimal(-29.6821417),
-      longitude: new Decimal(-51.1279104),
+      latitude: -29.6821417,
+      longitude: -51.1279104,
     })
   })
 
@@ -60,7 +62,7 @@ describe('Check In Service', () => {
         userLatitude: -29.6821417,
         userLongitude: -51.1279104,
       }),
-    ).rejects.toBeInstanceOf(Error)
+    ).rejects.toBeInstanceOf(MaxNumberOfCheckInsError)
   })
 
   it('sould be able to check in twice but in different days', async () => {
@@ -102,6 +104,6 @@ describe('Check In Service', () => {
         userLatitude: -29.6821417,
         userLongitude: -51.1279104,
       }),
-    ).rejects.toBeInstanceOf(Error)
+    ).rejects.toBeInstanceOf(MaxDistanceError)
   })
 })

@@ -8,7 +8,7 @@ import { RegisterService } from './register'
 let usersRepository: UsersRepositoryMock
 let sut: RegisterService
 
-describe('Register Use Case', () => {
+describe('Register Service', () => {
   beforeEach(() => {
     usersRepository = new UsersRepositoryMock()
     sut = new RegisterService(usersRepository)
