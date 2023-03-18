@@ -3,22 +3,22 @@ import { UsersRepository } from '@/repositories/users-repository'
 import { compare } from 'bcryptjs'
 import { User } from '@prisma/client'
 
-interface IAutenticateServiceRequest {
+interface IAuthenticateServiceRequest {
   email: string
   password: string
 }
 
-interface IAutenticateServiceResponse {
+interface IAuthenticateServiceResponse {
   user: User
 }
 
-export class AutenticateService {
+export class AuthenticateService {
   constructor(private usersRepository: UsersRepository) {}
 
   async execute({
     email,
     password,
-  }: IAutenticateServiceRequest): Promise<IAutenticateServiceResponse> {
+  }: IAuthenticateServiceRequest): Promise<IAuthenticateServiceResponse> {
     const user = await this.usersRepository.findByEmail(email)
 
     if (!user) {
