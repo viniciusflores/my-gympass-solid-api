@@ -1,4 +1,4 @@
-import { SearchGymService } from './searchGym'
+import { SearchGymService } from './search-gym'
 import { GymsRepositoryMock } from '@/repositories/mock/gym-repository-mock'
 import { describe, it, expect, beforeEach } from 'vitest'
 
