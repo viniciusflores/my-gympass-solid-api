@@ -17,6 +17,7 @@ describe('Validate Check-in (e2e)', () => {
     const { token } = await createAndAuthenticateUser(app)
 
     const user = await prisma.user.findFirstOrThrow()
+
     const gym = await prisma.gym.create({
       data: {
         title: 'JS Gym',
@@ -35,10 +36,7 @@ describe('Validate Check-in (e2e)', () => {
     const response = await request(app.server)
       .patch(`/check-ins/${checkIn.id}/validate`)
       .set('Authorization', `Bearer ${token}`)
-      .send({
-        latitude: -29.6821417,
-        longitude: -51.1279104,
-      })
+      .send()
 
     expect(response.statusCode).toEqual(204)
 
